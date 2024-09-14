@@ -6,6 +6,7 @@ import SvgAlgolia from "@/svg/SvgAlgolia";
 import CreateAccount from "./CreateAccount";
 import UserMenu from "./UserMenu";
 import { useGetUser } from "@/hooks";
+import Link from "next/link";
 
 export default function NavBar({ searchTerm, setSearchTerm }) {
   const { user } = useGetUser();
@@ -23,13 +24,13 @@ export default function NavBar({ searchTerm, setSearchTerm }) {
           <button className="md:hidden hover:bg-black/10 size-9 ">
             <SvgMenu />
           </button>
-          <a href="">
+          <Link href="/">
             <img
               className="size-11"
               src="https://media.dev.to/cdn-cgi/image/quality=100/https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
               alt=""
             />
-          </a>
+          </Link>
         </section>
         <form className=" my-auto   max-w-2xl">
           <label htmlFor="" className="relative hidden md:flex h-full ">
@@ -53,7 +54,7 @@ export default function NavBar({ searchTerm, setSearchTerm }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <a
+            <Link
               href=""
               className={clsx(
                 "absolute right-4 top-1",
@@ -66,7 +67,7 @@ export default function NavBar({ searchTerm, setSearchTerm }) {
                 <SvgAlgolia />
               </span>
               Algolia
-            </a>
+            </Link>
           </label>
           <button
             disabled

@@ -1,5 +1,5 @@
 import { iconsNewPost } from "@/components/IconsAside";
-import NavBar from "@/components/Navbar/Navbar";
+import NavNew from "@/components/Navbar/NavNew";
 import { useGetUser } from "@/hooks";
 import IconBtn from "@/svg/newPost/IconBtn";
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -15,9 +15,8 @@ export default function NewPost() {
 
   return (
     <div className="bg-[#e2e2e2] h-screen ">
-      <nav>
-        <NavBar />
-      </nav>
+      <NavNew />
+
       <div
         className={clsx("h-max my-3", {
           "grid-cols-[1fr] w-screen": size.width < 768,
@@ -63,9 +62,6 @@ export default function NewPost() {
             <button>Revert new change</button>
           </div>
         </form>
-        {size.width > 767 && (
-          <section className="bg-black text-white border border-white "></section>
-        )}
       </div>
     </div>
   );
