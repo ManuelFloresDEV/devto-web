@@ -1,13 +1,15 @@
 import clsx from "clsx";
+import Link from "next/link";
 
-export function Button({ text, className, variant = "login" }) {
+export function Button({ href = "/", text, className, variant = "login" }) {
   return (
-    <button
+    <Link
+      href={href}
       className={clsx(
-        "rounded-md px-2 font-semibold whitespace-nowrap",
+        "flex justify-center items-center rounded-md px-2 font-semibold whitespace-nowrap",
         className,
         {
-          "hidden md:inline hover:bg-blue-300/25 hover:underline hover:text-blue-700 text-zinc-500":
+          "md:flex hover:bg-blue-300/25 hover:underline hover:text-blue-700 text-zinc-500":
             variant === "login",
           "border border-blue-700 text-blue-700 hover:text-white hover:bg-blue-600 hover:underline":
             variant === "create",
@@ -15,6 +17,6 @@ export function Button({ text, className, variant = "login" }) {
       )}
     >
       {text}
-    </button>
+    </Link>
   );
 }

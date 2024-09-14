@@ -1,12 +1,15 @@
 import CardAccount from "./CardAccount";
 import NavLink from "./NavLink";
 import { icons, other, social } from "@/components/IconsAside";
+import { useGetUser } from "@/hooks";
 
-export default function AsideNav(props) {
+export default function AsideNav() {
+  const { user } = useGetUser();
+
   return (
     <>
-      <CardAccount />
-      <ul className="py-4">
+      {!user && <CardAccount />}
+      <ul className="pb-4">
         {icons.map((icon) => {
           return <NavLink key={icon.name} name={icon.name} svg={icon.svg} />;
         })}

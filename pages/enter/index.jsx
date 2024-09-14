@@ -1,15 +1,60 @@
-import Apple from "@/svg/Apple";
-import Facebook from "@/svg/Facebook";
-import Forem from "@/svg/Forem";
-import Google from "@/svg/Google";
+import BtnLogin from "@/components/CreateAccount/BtnLogin";
+import { iconsLogin } from "@/components/IconsAside";
+import { useRouter } from "next/router";
+import Login from "@/components/CreateAccount/Login";
+import Links from "@/components/CreateAccount/Links";
+import Email from "@/svg/Email";
 
-export default function Login() {
+export default function Enter() {
+  const router = useRouter();
+  const { state } = router.query;
+
   return (
-    <span>
-      <Apple />
-      <Facebook />
-      <Forem />
-      <Google />
-    </span>
+    <div className="bg-white">
+      <main className="border border-red-400 w-full max-w-screen-sm flex flex-col py-10 px-4 mx-auto items-center">
+        <img
+          className="h-12 w-16 mb-5"
+          src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
+          alt=""
+        />
+
+        <h1 className="text-3xl font-bold pb-1">Join the DEV Community</h1>
+        <p className="text-center">
+          DEV Community is Link community of 2,019.490 amazing developers
+        </p>
+        <section className=" w-full flex flex-col items-center gap-3 py-6">
+          {iconsLogin.map((icon) => {
+            return (
+              <BtnLogin key={icon.name} svg={icon.svg} redSocial={icon.name} />
+            );
+          })}
+          {state === "new-user" && (
+            <BtnLogin svg={<Email />} redSocial={"Email"} />
+          )}
+        </section>
+
+        {state !== "new-user" && <Login />}
+
+        <p className="text-center italic opacity-75 w-3/4">
+          By signing up, you are agreeing to our
+          <Links text={" privacy policy, "} />
+          <Links text={"terms of use "} />
+          and
+          <Links text={" code of conduct. "} />
+        </p>
+        <hr className="w-full my-6" />
+        {state === "new-user" ? (
+          <p>
+            Already have an account?
+            <Links text={" Log in"} href={"/enter"} />
+          </p>
+        ) : (
+          <p>
+            New to DEV Community?
+            <Links text={" Create account"} href={"?state=new-user"} />
+          </p>
+        )}
+      </main>
+    </div>
   );
 }

@@ -1,12 +1,31 @@
-// pages/TestPage.js
-import { usePosts } from "@/hooks"; // Ajusta la ruta según la ubicación de tu archivo
-import { formatDate } from "@/utils/formatDate";
+import React from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
+import { getPosts } from "@/utils/api";
+import { usePosts } from "@/hooks";
 
-export default function TestPage() {
-  const posts = usePosts(); // Usa el hook
-  console.log(posts);
-  formatDate("2024-08-13T05:53:35.550Z");
+function App() {
+  const size = useWindowSize();
+  const data = usePosts();
 
-  // No necesitas retornar nada visible; esto es solo para ver los resultados en la consola
-  return null; // No se muestra nada en la pantalla
+  console.log(data);
+  return (
+    <div>
+      <h1>useWindowSize</h1>
+      <p>Resize the window to see the changes</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Width</th>
+            <td>{size.width}</td>
+          </tr>
+          <tr>
+            <th>Height</th>
+            <td>{size.height}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
 }
+
+export default App;

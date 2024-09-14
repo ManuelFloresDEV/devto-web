@@ -2,11 +2,16 @@ import clsx from "clsx";
 import SvgSearch from "@/svg/SvgSerch";
 import SvgMenu from "@/svg/SvgMenu";
 import SvgAlgolia from "@/svg/SvgAlgolia";
-import { Button } from "../UI/Button";
 
-export default function NavBar() {
+import CreateAccount from "./CreateAccount";
+import UserMenu from "./UserMenu";
+import { useGetUser } from "@/hooks";
+
+export default function NavBar({ searchTerm, setSearchTerm }) {
+  const { user } = useGetUser();
+
   return (
-    <>
+    <nav className="bg-white text-black  col-span-full fixed h-14 w-screen">
       <div
         className={clsx(
           "grid gap-1 grid-cols-[0.4fr_1fr_0.3fr]",
@@ -29,6 +34,7 @@ export default function NavBar() {
         <form className=" my-auto   max-w-2xl">
           <label htmlFor="" className="relative hidden md:flex h-full ">
             <button
+              disabled
               className={clsx(
                 "absolute left-1 top-1",
                 "mx-auto h-9 w-7",
@@ -44,6 +50,8 @@ export default function NavBar() {
               )}
               placeholder="Search..."
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <a
               href=""
@@ -61,6 +69,7 @@ export default function NavBar() {
             </a>
           </label>
           <button
+            disabled
             className={clsx(
               "block ml-auto",
               "md:hidden size-9",
@@ -70,18 +79,12 @@ export default function NavBar() {
             <SvgSearch />
           </button>
         </form>
-        <section
-          className={clsx(
-            "gap-2 flex justify-end",
-            "md:justify-center",
-            "lg:justify-end ",
-            "mr-3 py-1"
-          )}
-        >
-          <Button text={"Login"} />
-          <Button text={"Create account"} variant={"create"} />
-        </section>
+        {user ? (
+          <UserMenu pic={user.profilePic} name={user.name} />
+        ) : (
+          <CreateAccount />
+        )}
       </div>
-    </>
+    </nav>
   );
 }

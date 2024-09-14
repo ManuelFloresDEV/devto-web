@@ -1,32 +1,35 @@
 import clsx from "clsx";
-import NavBar from "@/components/Navbar/Navbar";
 import AsideNav from "@/components/asideNav/AsideNav";
 import CardPost from "@/components/CardPost";
-import { usePosts } from "@/hooks";
-import { getAllPosts } from "@/utils/api";
+import { getPosts } from "@/utils/api";
+import { useSize } from "@/hooks";
+import MainLayout from "@/layouts/MainLayout";
+import { useState } from "react";
 
 export default function Home({ posts }) {
+  const size = useSize();
+
   return (
-    <>
-      <nav className="bg-white text-black  col-span-full fixed h-14 w-screen">
-        <NavBar />
-      </nav>
+    <MainLayout>
       <div
         className={clsx(
           "grid grid-rows-2 grid-cols-1 gap-4",
           "md:grid-cols-[0.8fr_3fr]",
           "lg:grid-cols-[0.6fr_1.8fr_0.8fr]",
-          "max-w-screen-xl mx-auto pt-20 px-3 "
+          "max-w-screen-xl mx-auto pt-20  "
         )}
       >
-        <aside className={clsx(" ", "hidden md:block")}>
-          <AsideNav />
-        </aside>
+        {size > 766 && (
+          <aside className={clsx("hidden md:block")}>
+            <AsideNav />
+          </aside>
+        )}
+
         <main className={clsx("flex flex-col gap-2 ")}>
           {posts.map((post) => {
             return (
               <CardPost
-                key={post.title}
+                key={post._id}
                 image={post.image}
                 title={post.title}
                 user={post.user}
@@ -36,16 +39,17 @@ export default function Home({ posts }) {
             );
           })}
         </main>
-        <aside className={clsx("bg-white ", "hidden lg:block ")}>
-          <ul className=""></ul>
-        </aside>
+        {size > 1023 && (
+          <aside className={clsx("bg-white ", "hidden lg:block ")}></aside>
+        )}
       </div>
-    </>
+    </MainLayout>
   );
 }
 
 export async function getStaticProps() {
-  const posts = await getAllPosts();
+  const posts = await getPosts();
+  console.log("server");
 
   return {
     props: {

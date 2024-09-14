@@ -1,10 +1,6 @@
 export default function SvgAbout() {
   return (
-    <svg
-      viewBox="0 0 864 864"
-      xmlns="http://www.w3.org/2000/svg"
-      className="size-6"
-    >
+    <svg viewBox="0 0 864 864" xmlns="http://www.w3.org/2000/svg">
       <clipPath id="clippath">
         <rect width="864" height="864" />
       </clipPath>

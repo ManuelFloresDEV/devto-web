@@ -1,3 +1,13 @@
+import Apple from "@/svg/Apple";
+import Facebook from "@/svg/Facebook";
+import Forem from "@/svg/Forem";
+import Google from "@/svg/Google";
+import Icon1 from "@/svg/newPost/Icon1";
+import Icon2 from "@/svg/newPost/Icon2";
+import Icon3 from "@/svg/newPost/Icon3";
+import Icon4 from "@/svg/newPost/Icon4";
+import Icon5 from "@/svg/newPost/Icon5";
+import Icon6 from "@/svg/newPost/Icon6";
 import SvgAbout from "@/svg/SvgAbout";
 import SvgConduct from "@/svg/SvgConduct";
 import SvgContact from "@/svg/SvgContact";
@@ -120,5 +130,53 @@ export const other = [
   {
     name: "Terms of use",
     svg: <SvgTerms />,
+  },
+];
+
+export const iconsLogin = [
+  {
+    name: "Apple",
+    svg: <Apple />,
+  },
+  {
+    name: "Facebook",
+    svg: <Facebook />,
+  },
+  {
+    name: "Forem",
+    svg: <Forem />,
+  },
+  {
+    name: "GitHub",
+    svg: <SvgGitHub />,
+  },
+  {
+    name: "Google",
+    svg: <Google />,
+  },
+  {
+    name: "Twitter (x)",
+    svg: <SvgX />,
+  },
+];
+
+export const iconsNewPost = [
+  {
+    icon: <Icon1 />,
+  },
+  {
+    icon: <Icon2 />,
+  },
+  {
+    icon: <Icon3 />,
+  },
+  {
+    icon: <Icon4 />,
+  },
+  {
+    icon: <Icon5 />,
+  },
+  {
+    icon: <Icon6 />,
   },
 ];
