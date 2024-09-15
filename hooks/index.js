@@ -1,4 +1,4 @@
-import { getPosts, getUserById, login } from "@/utils/api";
+import { createPost, getPosts, getUserById, login } from "@/utils/api";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -112,4 +112,46 @@ export function useGetUser() {
   }, [token]);
 
   return { user, error };
+}
+
+export function useNewPost(yupSchema) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(yupSchema) });
+
+  async function onSubmit(data) {
+    try {
+      setIsSubmitting(true);
+      const createP = await createPost(data);
+
+      console.log(createP);
+      if (createP.error) {
+        setError("root.data", { type: "manual", message: createP.error });
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (createP) {
+        router.push("/");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      setError("root.data", { type: "manual", message: error.message });
+      setIsSubmitting(false);
+    }
+  }
+
+  return {
+    isSubmitting,
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+  };
 }

@@ -50,3 +50,26 @@ export async function getUserById(id) {
     return { success: false, message: error.message };
   }
 }
+
+export async function createPost(newPost) {
+  try {
+    let response = await fetch(`${API_BACKEND}/Posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(newPost),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Error al crear el post");
+    }
+
+    let data = await response.json();
+    return data;
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}

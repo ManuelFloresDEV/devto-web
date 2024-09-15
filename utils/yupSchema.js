@@ -32,4 +32,11 @@ export const loginSchema = yup
   })
   .required();
 
+export const newPost = yup.object({
+  tags: yup.string().required(),
+  title: yup.string().required(),
+  image: yup.string().required(),
+  body: yup.string().required(),
+});
+
 export default loginSchema;
