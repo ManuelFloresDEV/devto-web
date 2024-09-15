@@ -73,3 +73,26 @@ export async function createPost(newPost) {
     return { success: false, message: error.message };
   }
 }
+
+export async function signUp(newUser) {
+  try {
+    const response = await fetch(`${API_BACKEND}/user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Error during sign up");
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Sign up error:", error);
+    throw new Error(error.message);
+  }
+}

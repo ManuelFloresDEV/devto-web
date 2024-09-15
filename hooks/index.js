@@ -1,9 +1,17 @@
-import { createPost, getPosts, getUserById, login } from "@/utils/api";
+import {
+  createPost,
+  getPosts,
+  getUserById,
+  login,
+  signUp,
+  singUp,
+} from "@/utils/api";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Email from "@/svg/Email";
 
 export function usePosts() {
   const [posts, setPosts] = useState([]);
@@ -138,6 +146,58 @@ export function useNewPost(yupSchema) {
       }
 
       if (createP) {
+        router.push("/");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      setError("root.data", { type: "manual", message: error.message });
+      setIsSubmitting(false);
+    }
+  }
+
+  return {
+    isSubmitting,
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+  };
+}
+
+export function useSignUp(yupSchema) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(yupSchema) });
+
+  async function onSubmit(data) {
+    console.log(data);
+
+    const modifiedData = {
+      name: `${data.name} ${data.user}`,
+      password: data.password,
+      email: data.email,
+      profilePic: data.profilePic,
+    };
+    console.log(modifiedData);
+
+    try {
+      setIsSubmitting(true);
+      const register = await signUp(modifiedData);
+
+      if (register.error) {
+        setError("root.data", { type: "manual", message: register.error });
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (register) {
+        localStorage.setItem("register", register);
         router.push("/");
         setIsSubmitting(false);
       }
