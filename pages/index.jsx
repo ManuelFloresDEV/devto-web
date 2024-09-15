@@ -4,7 +4,6 @@ import CardPost from "@/components/CardPost";
 import { getPosts } from "@/utils/api";
 import { useSize } from "@/hooks";
 import MainLayout from "@/layouts/MainLayout";
-import { useState } from "react";
 
 export default function Home({ posts }) {
   const size = useSize();
@@ -26,7 +25,8 @@ export default function Home({ posts }) {
         )}
 
         <main className={clsx("flex flex-col gap-2 ")}>
-          {posts.map((post) => {
+          {posts.map((post, idx) => {
+            const showImage = idx === 0;
             return (
               <CardPost
                 key={post._id}
@@ -35,6 +35,7 @@ export default function Home({ posts }) {
                 user={post.user}
                 tags={post.tags}
                 createdAt={post.createdAt}
+                showImage={showImage}
               />
             );
           })}

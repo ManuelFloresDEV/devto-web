@@ -50,7 +50,7 @@ export default function Signup() {
 
         <label className="flex gap-3 border border-black/20 max-w-min py-4 bg-[#f9f9f9] px-2">
           <input id="" className="size-7" type="checkbox" required />
-          <p className=" whitespace-nowrap">I'm not a robot</p>
+          <p className=" whitespace-nowrap">I&apos;m not a robot</p>
         </label>
         <button
           disabled={isSubmitting}

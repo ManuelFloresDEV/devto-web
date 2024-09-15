@@ -8,11 +8,15 @@ export async function getPosts(search = "") {
 
     const response = await fetch(url);
 
-    const data = await response.json();
-    console.log(data);
-    return data.data.posts;
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData.data.posts;
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error.message);
   }
 }
 
@@ -26,14 +30,15 @@ export async function login(dataLogin) {
       body: JSON.stringify(dataLogin),
     });
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      throw new Error(response.status);
+      throw new Error(responseData.message);
     }
 
-    const data = await response.json();
-    return data.data?.token;
+    return responseData.data.token;
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error.message);
   }
 }
 
@@ -41,36 +46,42 @@ export async function getUserById(id) {
   try {
     const response = await fetch(`${API_BACKEND}/user/${id}`);
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `Error: ${responseData.status} - ${responseData.statusText}`
+      );
     }
-    const data = await response.json();
-    return data.data.user;
+    return responseData.data.user;
   } catch (error) {
-    return { success: false, message: error.message };
+    throw new Error(error.message);
   }
 }
 
 export async function createPost(newPost) {
   try {
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found, authorization required.");
+
     let response = await fetch(`${API_BACKEND}/Posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: token,
       },
       body: JSON.stringify(newPost),
     });
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Error al crear el post");
+      throw new Error(responseData.message || "Error al crear el post");
     }
 
-    let data = await response.json();
-    return data;
+    return responseData;
   } catch (error) {
-    return { success: false, message: error.message };
+    throw new Error(error.message);
   }
 }
 
@@ -83,14 +94,13 @@ export async function signUp(newUser) {
       },
       body: JSON.stringify(newUser),
     });
+    const responseData = await response.json();
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Error during sign up");
+      throw new Error(responseData.message || "Error during sign up");
     }
 
-    const data = await response.json();
-    return data.data;
+    return responseData.data;
   } catch (error) {
     console.error("Sign up error:", error);
     throw new Error(error.message);
