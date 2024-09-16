@@ -7,7 +7,7 @@ export default function AsideNav() {
   const { user } = useGetUser();
 
   return (
-    <>
+    <div className="h-full overflow-y-auto">
       {!user && <CardAccount />}
       <ul className="pb-4">
         {icons.map((icon) => {
@@ -34,6 +34,6 @@ export default function AsideNav() {
           );
         })}
       </section>
-    </>
+    </div>
   );
 }

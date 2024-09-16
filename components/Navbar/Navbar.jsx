@@ -7,8 +7,14 @@ import CreateAccount from "./CreateAccount";
 import UserMenu from "./UserMenu";
 import { useGetUser } from "@/hooks";
 import Link from "next/link";
+import { useState } from "react";
+import AsideNav from "../asideNav/AsideNav";
 
 export default function NavBar({ search, setSearch }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+  }
   const { user } = useGetUser();
 
   return (
@@ -21,9 +27,35 @@ export default function NavBar({ search, setSearch }) {
         )}
       >
         <section className=" flex gap-2 items-center  ">
-          <button className="md:hidden hover:bg-black/10 size-9 ">
+          <button
+            onClick={toggleMenu}
+            className="md:hidden hover:bg-black/10 size-9 "
+          >
             <SvgMenu />
           </button>
+          {menuOpen && (
+            <div
+              className="fixed inset-0 bg-black/30"
+              onClick={toggleMenu}
+            ></div>
+          )}
+          <div
+            className={clsx(
+              "fixed top-0 left-0 transition-transform ",
+              "h-full w-64 py-3 ps-3",
+              "bg-white  shadow-lg",
+              menuOpen ? "translate-x-0" : "-translate-x-full"
+            )}
+          >
+            <span className=" flex justify-between items-center pr-2">
+              <p className="text-lg font-semibold">DEV Community</p>
+              <p onClick={toggleMenu} className="text-2xl font-semibold">
+                x
+              </p>
+            </span>
+            <AsideNav />
+          </div>
+
           <Link href="/">
             <img
               className="size-11"

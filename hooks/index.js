@@ -196,8 +196,10 @@ export function useSignUp(yupSchema) {
         return;
       }
 
+      const user = JSON.stringify(register.user);
+
       if (register) {
-        localStorage.setItem("register", register);
+        localStorage.setItem("token", register.token);
         router.push("/");
         setIsSubmitting(false);
       }

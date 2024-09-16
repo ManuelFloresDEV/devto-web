@@ -100,7 +100,7 @@ export async function signUp(newUser) {
       throw new Error(responseData.message || "Error during sign up");
     }
 
-    return responseData.data;
+    return responseData.data.user;
   } catch (error) {
     console.error("Sign up error:", error);
     throw new Error(error.message);
