@@ -4,7 +4,7 @@ export default function Tags({ tags }) {
       {tags.map((tag) => (
         <span
           key={tag}
-          className="py-1 px-2 border hover:border-black hover:bg-black/10 text-sm rounded-md"
+          className="py-1 px-2  hover:border-black hover:bg-black/5 text-sm rounded-md"
         >
           {tag}
         </span>
