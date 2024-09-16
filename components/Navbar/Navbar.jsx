@@ -8,7 +8,7 @@ import UserMenu from "./UserMenu";
 import { useGetUser } from "@/hooks";
 import Link from "next/link";
 
-export default function NavBar({ searchTerm, setSearchTerm }) {
+export default function NavBar({ search, setSearch }) {
   const { user } = useGetUser();
 
   return (
@@ -51,8 +51,8 @@ export default function NavBar({ searchTerm, setSearchTerm }) {
               )}
               placeholder="Search..."
               type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <Link
               href=""

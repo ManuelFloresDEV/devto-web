@@ -4,12 +4,18 @@ import CardPost from "@/components/CardPost";
 import { getPosts } from "@/utils/api";
 import { useSize } from "@/hooks";
 import MainLayout from "@/layouts/MainLayout";
+import { useState } from "react";
 
 export default function Home({ posts }) {
   const size = useSize();
+  const [search, setSearch] = useState("");
+
+  const postFilter = posts.filter((post) =>
+    post.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <MainLayout>
+    <MainLayout search={search} setSearch={setSearch}>
       <div
         className={clsx(
           "grid grid-rows-2 grid-cols-1 gap-4",
@@ -25,7 +31,7 @@ export default function Home({ posts }) {
         )}
 
         <main className={clsx("flex flex-col gap-2 ")}>
-          {posts.map((post, idx) => {
+          {postFilter.map((post, idx) => {
             const showImage = idx === 0;
             return (
               <CardPost
