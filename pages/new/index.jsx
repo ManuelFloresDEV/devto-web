@@ -5,11 +5,10 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import clsx from "clsx";
 import { newPost } from "@/utils/yupSchema";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNewPost } from "@/hooks";
 
 export default function NewPost() {
-  const [token, setToken] = useState(null);
   const router = useRouter();
   const { errors, handleSubmit, isSubmitting, onSubmit, register } =
     useNewPost(newPost);
@@ -19,8 +18,6 @@ export default function NewPost() {
 
     if (!storedToken) {
       router.push("/enter");
-    } else {
-      setToken(storedToken);
     }
   }, [router]);
 

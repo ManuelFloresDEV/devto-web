@@ -12,6 +12,8 @@ export default function CardPost({
   user = {},
   showImage = true,
 }) {
+  const [day, month, year] = formatDate(createdAt);
+
   return (
     <article className="bg-white rounded-md">
       <Link href={`/${user.name}/${title}`}>
@@ -24,7 +26,7 @@ export default function CardPost({
         )}
         <section className="grid grid-cols-[0.1fr_1.5fr] p-3">
           <img
-            className="size-8 mt-1 rounded-full"
+            className="size-8 mt-1 mr-3 rounded-full"
             src={user.profilePic}
             alt={user.name}
           />
@@ -44,7 +46,7 @@ export default function CardPost({
                 "hover:text-black"
               )}
             >
-              {formatDate(createdAt)}
+              {`${month} ${day}`}
             </p>
             <h4
               className={clsx("text-3xl font-bold py-2", "hover:text-blue-800")}

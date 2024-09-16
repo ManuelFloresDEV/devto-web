@@ -1,6 +1,7 @@
+import DetailUser from "@/components/DetailUser";
 import Tags from "@/components/UI/Tags";
-import { useSize } from "@/hooks";
 import MainLayout from "@/layouts/MainLayout";
+import SavePost from "@/svg/SavePost";
 import SvgComments from "@/svg/SvgComment";
 import SvgHeartPost from "@/svg/SvgHeartPost";
 import { getPosts } from "@/utils/api";
@@ -8,55 +9,62 @@ import { formatDate } from "@/utils/formatDate";
 import clsx from "clsx";
 
 export default function PostDetail({ post }) {
-  const size = useSize();
+  const [day, month] = formatDate(post.createdAt);
+
   return (
     <MainLayout>
-      <div className={clsx("flex pt-16 bg-[#ebebeb]")}>
-        <div className="w-16 text-white  ">
-          <ul>
-            <SvgHeartPost />
-            <SvgComments />
-          </ul>
-        </div>
-        <main className="w-full mx-3 bg-white">
-          <span className="flex w-full ">
-            <img className="w-full h-auto " src={post.image} alt="" />
-          </span>
-          <div className="pt-6 px-11">
-            <section className="flex ">
+      <div
+        className={clsx(
+          "max-w-screen-xl mx-auto",
+          "flex pt-16 md:px-3 bg-[#ebebeb]"
+        )}
+      >
+        <aside
+          className={clsx(
+            "hidden w-24 gap-6 pt-16 ",
+            "md:flex  flex-col items-center"
+          )}
+        >
+          <SvgHeartPost />
+          <SvgComments />
+          <SavePost />
+        </aside>
+        <div className="lg:flex w-full">
+          <main className="w-full md:mx-3  bg-white">
+            <span className="flex h-80 w-full ">
               <img
-                className="size-10 rounded-full mr-4 items-center"
-                src={post.user.profilePic}
-                alt={post.user.name}
+                className="w-full object-cover h-auto "
+                src={post.image}
+                alt={post.title}
               />
-              <div>
-                <p className="font-bold">{post.user.name}</p>
-                <p className="font-extralight text-xs">
-                  Posted on {formatDate(post.createdAt)}
-                </p>
-              </div>
-            </section>
+            </span>
+            <div className="pt-6 px-11">
+              <section className="flex ">
+                <img
+                  className="size-10 rounded-full mr-4 items-center"
+                  src={post.user.profilePic}
+                  alt={post.user.name}
+                />
+                <div>
+                  <p className="font-bold">{post.user.name}</p>
+                  <p className="font-extralight text-xs">
+                    Posted on {`${month} ${day}`}
+                  </p>
+                </div>
+              </section>
 
-            <section className="pt-5">
-              <p>💖</p>
-            </section>
-            <h1 className="font-black text-4xl py-3">{post.title}</h1>
-            <section>
-              <Tags tags={post.tags} />
-            </section>
-            <p className="pt-10">{post.body}</p>
-          </div>
-        </main>
-        <article className="hidden text-white bg-black border border-white ">
-          <ul>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-          </ul>
-        </article>
+              <section className="pt-5">
+                <p>💖</p>
+              </section>
+              <h1 className="font-black text-4xl py-3">{post.title}</h1>
+              <section>
+                <Tags tags={post.tags} />
+              </section>
+              <p className="py-10">{post.body}</p>
+            </div>
+          </main>
+          <DetailUser user={post.user} />
+        </div>
       </div>
     </MainLayout>
   );

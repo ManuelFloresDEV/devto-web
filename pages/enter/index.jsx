@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Login from "@/components/CreateAccount/Login";
 import Links from "@/components/CreateAccount/Links";
 import Email from "@/svg/Email";
+import Link from "next/link";
 
 export default function Enter() {
   const router = useRouter();
@@ -29,7 +30,15 @@ export default function Enter() {
             );
           })}
           {state === "new-user" && (
-            <BtnLogin svg={<Email />} redSocial={"Email"} />
+            <Link
+              href={"users/sign_up"}
+              className="h-[50px] w-full pl-2 flex items-center border border-gray-400 rounded-md"
+            >
+              <span className="">
+                <Email />
+              </span>
+              <span className="mx-auto font-medium">Sign up with Email</span>
+            </Link>
           )}
         </section>
 
