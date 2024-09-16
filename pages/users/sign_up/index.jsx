@@ -43,7 +43,11 @@ export default function Signup() {
         {errors.password && (
           <span className="text-red-600">{errors.password.message}</span>
         )}
-        <Input id={"passconf"} reg={register("passconf")} type={"password"} />
+        <Input
+          id={"confirmar password"}
+          reg={register("passconf")}
+          type={"password"}
+        />
         {errors.passconf && (
           <span className="text-red-600">{errors.passconf.message}</span>
         )}

@@ -1,6 +1,8 @@
 import Tags from "@/components/UI/Tags";
 import { useSize } from "@/hooks";
 import MainLayout from "@/layouts/MainLayout";
+import SvgComments from "@/svg/SvgComment";
+import SvgHeartPost from "@/svg/SvgHeartPost";
 import { getPosts } from "@/utils/api";
 import { formatDate } from "@/utils/formatDate";
 import clsx from "clsx";
@@ -9,27 +11,18 @@ export default function PostDetail({ post }) {
   const size = useSize();
   return (
     <MainLayout>
-      <div
-        className={clsx({
-          "grid grid-cols-[0.3fr_1fr_0.6fr]": size > 1023,
-          "grid grid-cols-[0.3fr_1fer]": size > 767,
-        })}
-      >
-        <div className="hidden text-white bg-black border border-white ">
+      <div className={clsx("flex pt-16 bg-[#ebebeb]")}>
+        <div className="w-16 text-white  ">
           <ul>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
-            <li>asds</li>
+            <SvgHeartPost />
+            <SvgComments />
           </ul>
         </div>
-        <main className>
-          <span className="flex w-full h-[323px] ">
+        <main className="w-full mx-3 bg-white">
+          <span className="flex w-full ">
             <img className="w-full h-auto " src={post.image} alt="" />
           </span>
-          <div className="p-6">
+          <div className="pt-6 px-11">
             <section className="flex ">
               <img
                 className="size-10 rounded-full mr-4 items-center"
@@ -45,13 +38,13 @@ export default function PostDetail({ post }) {
             </section>
 
             <section className="pt-5">
-              <p>icons</p>
+              <p>💖</p>
             </section>
-            <h1 className="font-black text-3xl py-3">{post.title}</h1>
+            <h1 className="font-black text-4xl py-3">{post.title}</h1>
             <section>
               <Tags tags={post.tags} />
             </section>
-            <p className="pt-3">{post.body}</p>
+            <p className="pt-10">{post.body}</p>
           </div>
         </main>
         <article className="hidden text-white bg-black border border-white ">
