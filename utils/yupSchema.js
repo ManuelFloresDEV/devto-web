@@ -41,6 +41,7 @@ export const newPost = yup.object({
 
 export const signUp = yup.object({
   name: yup.string().required(),
+  user: yup.string().required(),
   email: yup.string().required().email(),
   profilePic: yup.string().required().url(),
   password: yup

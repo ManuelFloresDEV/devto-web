@@ -5,6 +5,7 @@ import Login from "@/components/CreateAccount/Login";
 import Links from "@/components/CreateAccount/Links";
 import Email from "@/svg/Email";
 import Link from "next/link";
+import clsx from "clsx";
 
 export default function Enter() {
   const router = useRouter();
@@ -32,7 +33,11 @@ export default function Enter() {
           {state === "new-user" && (
             <Link
               href={"users/sign_up"}
-              className="h-[50px] w-full pl-2 flex items-center border border-gray-400 rounded-md"
+              className={clsx(
+                "pl-2 h-[50px] w-full",
+                "bg-green-500 border border-gray-400 rounded-md",
+                "flex items-center"
+              )}
             >
               <span className="">
                 <Email />

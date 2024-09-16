@@ -24,8 +24,8 @@ export default function Signup() {
           placeholder="Seleccionar archivo"
           {...register("profilePic")}
         />
-        {errors.profilepic && (
-          <span className="text-red-600">{errors.profilepic.message}</span>
+        {errors.profilePic && (
+          <span className="text-red-600">{errors.profilePic.message}</span>
         )}
         <Input id={"name"} reg={register("name")} type={"text"} />
         {errors.name && (
