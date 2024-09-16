@@ -11,7 +11,7 @@ export default function Signup() {
     <MainLayout>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col bg-white border border-black/20 rounded-md w-full max-w-xl  absolute left-1/2 transform -translate-x-1/2 mt-16 p-6 gap-3"
+        className="flex flex-col bg-white border border-black/20 rounded-md w-full max-w-xl -z-10  absolute left-1/2 transform -translate-x-1/2 mt-16 p-6 gap-3"
       >
         <h1 className="font-bold text-lg ">Create your account</h1>
         <label className="font-medium" htmlFor="img">

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useLogin } from "@/hooks";
 import yupSchema from "@/utils/yupSchema";
+import clsx from "clsx";
+import Input from "../UI/Input";
 
 export default function Login() {
   const { errors, handleSubmit, isSubmitting, onSubmit, register } =
@@ -13,23 +15,11 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2 w-full"
       >
-        <label htmlFor="">Email</label>
-        <input
-          {...register("email")}
-          className="pl-2 h-10 border border-black/20 rounded-md"
-          type="email"
-          disabled={isSubmitting}
-        />
+        <Input id={"Email"} reg={register("email")} type={"email"} />
         {errors.email && (
           <span className="text-red-500 text-xs">{errors.email.message}</span>
         )}
-        <label htmlFor="">Password</label>
-        <input
-          {...register("password")}
-          className="pl-2 h-10 border border-black/20 rounded-md"
-          type="password"
-          disabled={isSubmitting}
-        />
+        <Input id={"Password"} reg={register("password")} type={"password"} />
         {errors.password && (
           <span className="text-red-500 text-xs">
             {errors.password.message}
@@ -50,7 +40,12 @@ export default function Login() {
         )}
         <button
           disabled={isSubmitting}
-          className="bg-blue-700 h-14 rounded-md text-white my-6"
+          className={clsx(
+            "bg-blue-700",
+            "rounded-md text-white",
+            "h-14  my-6",
+            "hover:bg-blue-800"
+          )}
         >
           {isSubmitting ? "Loading..." : "Log in"}
         </button>

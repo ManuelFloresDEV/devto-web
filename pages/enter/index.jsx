@@ -13,7 +13,13 @@ export default function Enter() {
 
   return (
     <div className="bg-white">
-      <main className="border border-red-400 w-full max-w-screen-sm flex flex-col py-10 px-4 mx-auto items-center">
+      <main
+        className={clsx(
+          "w-full max-w-screen-sm",
+          "flex flex-col items-center",
+          "py-10 px-4 mx-auto "
+        )}
+      >
         <img
           className="h-12 w-16 mb-5"
           src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
@@ -24,7 +30,9 @@ export default function Enter() {
         <p className="text-center">
           DEV Community is Link community of 2,019.490 amazing developers
         </p>
-        <section className=" w-full flex flex-col items-center gap-3 py-6">
+        <section
+          className={clsx("w-full py-6", "flex flex-col items-center gap-3")}
+        >
           {iconsLogin.map((icon) => {
             return (
               <BtnLogin key={icon.name} svg={icon.svg} redSocial={icon.name} />

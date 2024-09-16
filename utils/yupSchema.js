@@ -28,7 +28,7 @@ export const loginSchema = yup
     email: yup
       .string()
       .email("enter valid email")
-      .required("the email is required"),
+      .required("email is required"),
   })
   .required();
 
