@@ -138,7 +138,6 @@ export function useNewPost(yupSchema) {
       setIsSubmitting(true);
       const createP = await createPost(data);
 
-      console.log(createP);
       if (createP.error) {
         setError("root.data", { type: "manual", message: createP.error });
         setIsSubmitting(false);
@@ -176,15 +175,12 @@ export function useSignUp(yupSchema) {
   } = useForm({ resolver: yupResolver(yupSchema) });
 
   async function onSubmit(data) {
-    console.log(data);
-
     const modifiedData = {
       name: `${data.name} ${data.user}`,
       password: data.password,
       email: data.email,
       profilePic: data.profilePic,
     };
-    console.log(modifiedData);
 
     try {
       setIsSubmitting(true);

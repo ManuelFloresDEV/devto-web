@@ -102,7 +102,6 @@ export async function signUp(newUser) {
 
     return responseData.data.user;
   } catch (error) {
-    console.error("Sign up error:", error);
     throw new Error(error.message);
   }
 }
