@@ -1,12 +1,12 @@
 # devto website
 
-site: https://devto-web-two.vercel.app/
+site. https://devto-web-two.vercel.app/
 
 esta pagina web es una replica de `dev.to` la cual permite registrarse, inicias sesion, crear publicacion y es responsiva, la pagina fue creada con next
 
 - **Autenticación de usuario (Registro/Login)**
 - **creacion de publicacion**
-- **Filtros de búsqueda**
+- **Filtros de búsqueda por titulo de publicacion**
 - **Responsive design**
 
 ### Tecnologías Utilizadas

@@ -1,17 +1,9 @@
-import {
-  createPost,
-  getPosts,
-  getUserById,
-  login,
-  signUp,
-  singUp,
-} from "@/utils/api";
+import { createPost, getPosts, getUserById, login, signUp } from "@/utils/api";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Email from "@/svg/Email";
 
 export function usePosts() {
   const [posts, setPosts] = useState([]);
@@ -124,19 +116,50 @@ export function useGetUser() {
 
 export function useNewPost(yupSchema) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tags, setTags] = useState([]);
+
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    setValue,
     setError,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(yupSchema) });
+  } = useForm({
+    resolver: yupResolver(yupSchema),
+    context: { tags },
+  });
+
+  function addTag(e) {
+    const trimmedValue = e.target.value.trim();
+
+    if (e.key === " " && trimmedValue !== "") {
+      let newTag = trimmedValue;
+
+      if (!newTag.startsWith("#")) {
+        newTag = `#${newTag}`;
+      }
+      if (tags.length < 4 && !tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setValue("tags", "");
+      }
+    }
+  }
+
+  function removeTags(tagToRemove) {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  }
 
   async function onSubmit(data) {
+    const modifiedData = {
+      ...data,
+      tags: tags.join(" "),
+    };
+
     try {
       setIsSubmitting(true);
-      const createP = await createPost(data);
+      const createP = await createPost(modifiedData);
 
       if (createP.error) {
         setError("root.data", { type: "manual", message: createP.error });
@@ -160,6 +183,9 @@ export function useNewPost(yupSchema) {
     handleSubmit,
     onSubmit,
     errors,
+    tags,
+    addTag,
+    removeTags,
   };
 }
 

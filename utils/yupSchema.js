@@ -33,7 +33,12 @@ export const loginSchema = yup
   .required();
 
 export const newPost = yup.object({
-  tags: yup.string().required(),
+  tags: yup
+    .string()
+    .test("tags-required", "You must add at least one tag", function (value) {
+      const { tags } = this.options.context;
+      return tags.length > 0 || (value && value.trim() !== "");
+    }),
   title: yup.string().required(),
   image: yup.string().required(),
   body: yup.string().required(),
