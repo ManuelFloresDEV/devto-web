@@ -20,11 +20,13 @@ export default function Enter() {
           "py-10 px-4 mx-auto "
         )}
       >
-        <img
-          className="h-12 w-16 mb-5"
-          src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
-          alt=""
-        />
+        <Link href="/">
+          <img
+            className="h-12 w-16 mb-5"
+            src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
+            alt=""
+          />
+        </Link>
 
         <h1 className="text-3xl font-bold pb-1">Join the DEV Community</h1>
         <p className="text-center">
