@@ -18,7 +18,7 @@ export default function Home({ posts }) {
     <MainLayout search={search} setSearch={setSearch}>
       <div
         className={clsx(
-          "grid grid-rows-2 grid-cols-1 gap-4",
+          "grid grid-cols-1 gap-4",
           "md:grid-cols-[0.8fr_3fr]",
           "lg:grid-cols-[0.6fr_1.8fr_0.8fr]",
           "max-w-screen-xl mx-auto pt-20  "
