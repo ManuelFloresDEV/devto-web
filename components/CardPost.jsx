@@ -26,7 +26,7 @@ export default function CardPost({
         )}
         <section className="grid grid-cols-[0.1fr_1.5fr] p-3">
           <img
-            className="size-8 mt-1 mr-3 rounded-full"
+            className="min-w-6 size-8 mt-1 mr-3 rounded-full"
             src={user.profilePic}
             alt={user.name}
           />

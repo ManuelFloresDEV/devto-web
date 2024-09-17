@@ -24,7 +24,10 @@ export default function UserMenu({ pic, name }) {
       <span className="my-auto">
         <Notification />
       </span>
-      <button onClick={() => logout(router)} className="my-auto rounded-full">
+      <button
+        onClick={() => logout(router)}
+        className=" min-w-10  my-auto rounded-full"
+      >
         <img className="rounded-full size-10" src={pic} alt={name} />
       </button>
     </section>

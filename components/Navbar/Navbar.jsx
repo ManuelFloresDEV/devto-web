@@ -26,7 +26,7 @@ export default function NavBar({ search, setSearch }) {
           "h-full px-3 max-w-screen-xl mx-auto"
         )}
       >
-        <section className=" flex gap-2 items-center  ">
+        <section className=" min-w-28 md:min-w-0 flex gap-2 items-center  ">
           <button
             onClick={toggleMenu}
             className="md:hidden hover:bg-black/10 size-9 "
