@@ -13,7 +13,7 @@ export default function DetailUser({ user = {} }) {
         "md:m-3 md:w-full"
       )}
     >
-      <article className={clsx("px-6", "relative top-[-15px] left-1 ")}>
+      <article className={clsx("px-6", "relative -z-0 top-[-15px] left-1 ")}>
         <div className="flex items-end gap-5">
           <img
             className="size-12 rounded-full"

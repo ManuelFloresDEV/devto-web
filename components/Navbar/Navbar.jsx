@@ -18,7 +18,7 @@ export default function NavBar({ search, setSearch }) {
   const { user } = useGetUser();
 
   return (
-    <nav className="bg-white text-black  col-span-full fixed h-14 w-screen">
+    <nav className="bg-white text-black z-10  col-span-full fixed h-14 w-screen">
       <div
         className={clsx(
           "grid gap-1 grid-cols-[0.4fr_1fr_0.3fr]",

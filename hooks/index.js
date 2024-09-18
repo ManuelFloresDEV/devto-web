@@ -126,6 +126,7 @@ export function useNewPost(yupSchema) {
     setValue,
     setError,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(yupSchema),
     context: { tags },
@@ -186,6 +187,7 @@ export function useNewPost(yupSchema) {
     tags,
     addTag,
     removeTags,
+    watch,
   };
 }
 
