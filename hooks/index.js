@@ -218,8 +218,6 @@ export function useSignUp(yupSchema) {
         return;
       }
 
-      const user = JSON.stringify(register.user);
-
       if (register) {
         localStorage.setItem("token", register.token);
         router.push("/");
@@ -237,5 +235,23 @@ export function useSignUp(yupSchema) {
     handleSubmit,
     onSubmit,
     errors,
+  };
+}
+
+export function useInputFocus() {
+  const [focusInput, setFocusInput] = useState(null);
+
+  function handleFocus(inputname) {
+    setFocusInput(inputname);
+  }
+
+  function handleBlur() {
+    setFocusInput(null);
+  }
+
+  return {
+    focusInput,
+    handleFocus,
+    handleBlur,
   };
 }

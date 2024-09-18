@@ -6,9 +6,14 @@ import clsx from "clsx";
 import { newPost } from "@/utils/yupSchema";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useNewPost } from "@/hooks";
+import { useInputFocus, useNewPost, useSize } from "@/hooks";
+import CardTipsBody from "@/components/CardTipsbody";
+import CardTipsTags from "@/components/CardTipsTags";
+import CardTipsTitle from "@/components/CardTipsTitle";
 
 export default function NewPost() {
+  const { focusInput, handleBlur, handleFocus } = useInputFocus();
+
   const router = useRouter();
   const {
     errors,
@@ -21,6 +26,7 @@ export default function NewPost() {
     removeTags,
   } = useNewPost(newPost);
 
+  console.log(focusInput);
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
@@ -28,7 +34,6 @@ export default function NewPost() {
       router.push("/enter");
     }
   }, [router]);
-
   const size = useWindowSize();
 
   return (
@@ -62,6 +67,10 @@ export default function NewPost() {
                 placeholder="New post title here..."
                 {...register("title")}
                 disabled={isSubmitting}
+                onFocus={() => {
+                  handleFocus("title");
+                }}
+                onBlur={handleBlur}
               />
               {errors.title && (
                 <span className="text-red-500">{errors.title.message}</span>
@@ -90,6 +99,10 @@ export default function NewPost() {
                 {...register("tags")}
                 disabled={isSubmitting || tags.length === 4}
                 onKeyDown={addTag}
+                onFocus={() => {
+                  handleFocus("tags");
+                }}
+                onBlur={handleBlur}
               />
 
               {errors.tags && (
@@ -105,8 +118,8 @@ export default function NewPost() {
                 "flex items-center gap-5   "
               )}
             >
-              {iconsNewPost.map((icon) => {
-                return <span key={icon.icon}>{icon.icon}</span>;
+              {iconsNewPost.map((icon, index) => {
+                return <span key={index}>{icon.icon}</span>;
               })}
             </div>
             <textarea
@@ -119,6 +132,10 @@ export default function NewPost() {
                 "resize-none text-black/65 text-xl focus:outline-none"
               )}
               placeholder="write your post content here..."
+              onFocus={() => {
+                handleFocus("body");
+              }}
+              onBlur={handleBlur}
             ></textarea>
             {errors.body && (
               <span className="text-red-500 pl-16">{errors.body.message}</span>
@@ -139,6 +156,23 @@ export default function NewPost() {
             </button>
           </div>
         </form>
+        <div>
+          {focusInput === "title" && size.width > 768 && (
+            <section className="max-w-md px-6 pt-24">
+              <CardTipsTitle />
+            </section>
+          )}
+          {focusInput === "tags" && size.width > 768 && (
+            <section className="max-w-md px-6 pt-40">
+              <CardTipsTags />
+            </section>
+          )}
+          {focusInput === "body" && size.width > 768 && (
+            <section className="max-w-md px-6 pt-56">
+              <CardTipsBody />
+            </section>
+          )}
+        </div>
       </div>
     </div>
   );
