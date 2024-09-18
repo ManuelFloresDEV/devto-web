@@ -1,3 +1,4 @@
+import CardDetailPost from "@/components/CardDetailPost";
 import DetailUser from "@/components/DetailUser";
 import Tags from "@/components/UI/Tags";
 import MainLayout from "@/layouts/MainLayout";
@@ -30,7 +31,15 @@ export default function PostDetail({ post }) {
           <SavePost />
         </aside>
         <div className="lg:flex w-full">
-          <main className="w-full md:mx-3  bg-white">
+          <CardDetailPost
+            image={post.image}
+            title={post.title}
+            tags={post.tags}
+            user={post.user}
+            body={post.body}
+            createdAt={post.createdAt}
+          />
+          {/* <main className="w-full md:mx-3  bg-white">
             <span className="flex h-80 w-full ">
               <img
                 className="w-full object-cover h-auto "
@@ -62,7 +71,7 @@ export default function PostDetail({ post }) {
               </section>
               <p className="py-10">{post.body}</p>
             </div>
-          </main>
+          </main> */}
           <DetailUser user={post.user} />
         </div>
       </div>
