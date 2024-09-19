@@ -2,12 +2,13 @@ import clsx from "clsx";
 import { Button } from "@/components/UI/Button";
 import Notification from "@/svg/Notificacton";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { logout } from "@/utils/logout";
-import { useRouter } from "next/router";
+import { useState } from "react";
+import CardMenuUser from "./CardMenuUser";
 
-export default function UserMenu({ pic, name }) {
+export default function UserMenu({ pic, name, email }) {
+  const [watchMenu, setWatchMenu] = useState(false);
+
   const size = useWindowSize();
-  const router = useRouter();
 
   return (
     <section
@@ -25,11 +26,12 @@ export default function UserMenu({ pic, name }) {
         <Notification />
       </span>
       <button
-        onClick={() => logout(router)}
+        onClick={() => setWatchMenu(!watchMenu)}
         className=" min-w-10  my-auto rounded-full"
       >
         <img className="rounded-full size-10" src={pic} alt={name} />
       </button>
+      {watchMenu && <CardMenuUser name={name} email={email} />}
     </section>
   );
 }

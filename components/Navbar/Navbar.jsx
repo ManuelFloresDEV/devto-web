@@ -113,7 +113,7 @@ export default function NavBar({ search, setSearch }) {
           </button>
         </form>
         {user ? (
-          <UserMenu pic={user.profilePic} name={user.name} />
+          <UserMenu pic={user.profilePic} name={user.name} email={user.email} />
         ) : (
           <CreateAccount />
         )}
